@@ -1,5 +1,3 @@
-package PROGA.homeworks.secondp;
-
 import java.util.function.Function;
 import java.util.stream.*;
 import java.util.List;

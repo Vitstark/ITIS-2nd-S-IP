@@ -1,5 +1,3 @@
-package PROGA.homeworks.thirdp;
-
 import java.util.LinkedList;
 import java.util.stream.*;
 import java.util.List;
