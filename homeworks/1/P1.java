@@ -8,7 +8,8 @@ public class P1 {
         int sum = 0;
         sum = list.stream()
                 .filter(x -> x % 2 == 0)
-                .mapToInt(x -> x).sum();
+                .mapToInt(x -> x)
+                .sum();
         return sum;
     }
 
