@@ -4,16 +4,40 @@ import java.util.stream.*;
 // Задания контрольной в README.md
 public class CW1 {
     // Решение задания A
-    public static double taskA(List<Purchase> purchases, String user) {
-        return 0;
+    public static double taskA(List<PROGA.CW.Purchase> purchases, String user) {
+        double result = 0;
+        result += purchases.stream()
+                .filter(x -> x.getCustomer().equals(user))
+                .filter(x -> x.getItem().equals("икра"))
+                .mapToDouble(x -> x.getPrice() * x.getCount() * 0.8)
+                .sum();
+        result += purchases.stream()
+                .filter(x -> x.getCustomer().equals(user))
+                .filter(x -> !x.getItem().equals("икра"))
+                .mapToDouble(x -> x.getPrice() * x.getCount())
+                .sum();
+        return result;
     }
     // Решение задания B
-    public static Map<String, List<Purchase>> taskB(List<Purchase> purchases) {
-        return null;
+    public static Map<String, List<PROGA.CW.Purchase>> taskB(List<PROGA.CW.Purchase> purchases) {
+        return purchases.stream()
+                .collect(Collectors.toMap(x -> x.getItem(), x -> Stream.of(x).toList(), (a,b) -> {
+                    List<PROGA.CW.Purchase> newList = new ArrayList<>(a);
+                    newList.addAll(b);
+                    return newList;
+                }));
     }
     // Решение задания C
-    public static List<Purchase> taskC(Map<String, List<Purchase>> res, String from, String to)  {
-        return null;
+    public static List<PROGA.CW.Purchase> taskC(Map<String, List<PROGA.CW.Purchase>> res, String from, String to)  {
+        List<PROGA.CW.Purchase> result = new LinkedList<>();
+        Iterator<String> iterator = res.keySet().iterator();
+        while (iterator.hasNext()) {
+            String elem = iterator.next();
+            if (elem.compareTo(from) > 0 && elem.compareTo(to) < 0) {
+                result.addAll(res.get(elem));
+            }
+        }
+        return result;
     }
     public static void main(String[] args) {
         // Поездка в город
