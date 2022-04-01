@@ -20,7 +20,7 @@ public class P6 {
 
         double average = randomList.stream()
                 .mapToInt(x -> x)
-                .sum() * 1.0 / n;ч
+                .sum() * 1.0 / n;
 
         double dispersion = randomList
                 .stream()
