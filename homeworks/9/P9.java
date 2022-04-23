@@ -15,13 +15,7 @@ public class P9 {
         scanner.nextLine();
 
         TableWriter table = new TableWriter(numberOfLines, numberOfColumns);
-
         table.read(scanner);
-
-        System.out.println(Arrays.toString(table.lengthsOfColumns));
-        System.out.println(Arrays.toString(table.table[0]));
-        System.out.println(Arrays.toString(table.table[1]));
-
         table.write(printWriter);
     }
 
@@ -29,20 +23,20 @@ public class P9 {
         int numberOfLines;
         int numberOfColumns;
         int [] lengthsOfColumns;
-        String [][] table;
+        String [][] wordsStorage;
 
         public TableWriter(int numberOfLines, int numberOfColumns) {
             this.numberOfLines = numberOfLines;
             this.numberOfColumns = numberOfColumns;
             lengthsOfColumns = new int[numberOfColumns];
-            table = new String[numberOfLines][numberOfColumns];
+            wordsStorage = new String[numberOfLines][numberOfColumns];
         }
 
         public void read(Scanner input) {
             for (int i = 0; i < numberOfLines; i++) {
                 for (int j = 0; j < numberOfColumns; j++) {
                     String word = input.nextLine();
-                    table[i][j] = word;
+                    wordsStorage[i][j] = word;
                     if (word.length() > lengthsOfColumns[j]) {
                         lengthsOfColumns[j] = word.length();
                     }
@@ -73,8 +67,8 @@ public class P9 {
             for (int i = 0; i < numberOfLines; i++) {
                 printWriter.print('|');
                 for (int j = 0; j < numberOfColumns; j++) {
-                    printWriter.print(table[i][j]);
-                    writeSpaces(lengthsOfColumns[j] - table[i][j].length(), printWriter);
+                    printWriter.print(wordsStorage[i][j]);
+                    writeSpaces(lengthsOfColumns[j] - wordsStorage[i][j].length(), printWriter);
                     printWriter.print('|');
                 }
                 printWriter.println();
