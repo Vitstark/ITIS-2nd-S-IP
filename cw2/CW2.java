@@ -96,7 +96,6 @@ public class CW2 {
                     .filter(x -> {
                         String fileName = x.getFileName().toString();
                         if (fileName.length() >= 3 && fileName.startsWith("lib")) {
-                            System.out.println(fileName);
                             return true;
                         }
                         return false;
