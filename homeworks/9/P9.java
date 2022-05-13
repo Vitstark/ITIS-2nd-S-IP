@@ -1,10 +1,12 @@
+package PROGA.homeworks.P9;
+
 import java.util.*;
 import java.io.*;
 
 public class P9 {
 
-    static String inputPath = "homeworks/P9/input.txt";
-    static String outputPath = "homeworks/P9/output.txt";
+    static String inputPath = "src/PROGA/homeworks/P9/input.txt";
+    static String outputPath = "src/PROGA/homeworks/P9/output.txt";
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(new FileInputStream(inputPath));
@@ -23,20 +25,20 @@ public class P9 {
         int numberOfLines;
         int numberOfColumns;
         int [] lengthsOfColumns;
-        String [][] wordsStorage;
+        String [][] tableOfStings;
 
         public TableWriter(int numberOfLines, int numberOfColumns) {
             this.numberOfLines = numberOfLines;
             this.numberOfColumns = numberOfColumns;
             lengthsOfColumns = new int[numberOfColumns];
-            wordsStorage = new String[numberOfLines][numberOfColumns];
+            tableOfStings = new String[numberOfLines][numberOfColumns];
         }
 
         public void read(Scanner input) {
             for (int i = 0; i < numberOfLines; i++) {
                 for (int j = 0; j < numberOfColumns; j++) {
                     String word = input.nextLine();
-                    wordsStorage[i][j] = word;
+                    tableOfStings[i][j] = word;
                     if (word.length() > lengthsOfColumns[j]) {
                         lengthsOfColumns[j] = word.length();
                     }
@@ -55,6 +57,11 @@ public class P9 {
             printWriter.println();
         }
 
+        private int getNumberOfSpaces(int maxLength, String string) {
+            int numberOfSpaces = maxLength - string.length();
+            return numberOfSpaces;
+        }
+
         private void writeSpaces(int numberOfSpaces, PrintWriter printWriter) {
             while (numberOfSpaces > 0) {
                 printWriter.print(' ');
@@ -62,15 +69,21 @@ public class P9 {
             }
         }
 
+        private void writeLine(int numberOfLine, PrintWriter printWriter) {
+            printWriter.print('|');
+            for (int i = 0; i < numberOfColumns; i++) {
+                String string = tableOfStings[numberOfLine][i];
+                int numberOfSpaces = getNumberOfSpaces(lengthsOfColumns[i], string);
+                printWriter.print(tableOfStings[numberOfLine][i]);
+                writeSpaces(numberOfSpaces, printWriter);
+                printWriter.print('|');
+            }
+        }
+
         public void write(PrintWriter printWriter) {
             writeBorder(printWriter);
             for (int i = 0; i < numberOfLines; i++) {
-                printWriter.print('|');
-                for (int j = 0; j < numberOfColumns; j++) {
-                    printWriter.print(wordsStorage[i][j]);
-                    writeSpaces(lengthsOfColumns[j] - wordsStorage[i][j].length(), printWriter);
-                    printWriter.print('|');
-                }
+                writeLine(i, printWriter);
                 printWriter.println();
                 writeBorder(printWriter);
             }
