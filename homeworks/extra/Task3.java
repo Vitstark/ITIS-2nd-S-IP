@@ -2,6 +2,10 @@ import java.util.*;
 
 public class Main {
 
+    public static void main(String[] args) {
+
+    }
+
     static int dist(String file1, String file2) {
 
         int numberOfEqualsWords = 0;
